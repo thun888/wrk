@@ -14,9 +14,7 @@ jobs:
         fetch-depth: 0
     - name: build
       run: make
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.TOKEN }}
-        publish_branch: main
-        publish_dir: ./
+      
+    - name: gan
+      run: ./wrk -t12 -c100 -d300s ${{ secrets.URL }}
+
