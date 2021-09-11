@@ -9,7 +9,8 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.builder }}
+    runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v2
       with:
