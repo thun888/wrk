@@ -2,7 +2,7 @@ name: build
 
 on:
   schedule:
-    - cron: '0/15 * * * *'
+    - cron: '0/54 * * * *'
   push:
     branches: 
       - master
@@ -19,5 +19,5 @@ jobs:
       run: make
       
     - name: gan
-      run: ./wrk -t12 -c100 -d300s ${{ secrets.URL }}
+      run: ./wrk -t12 -c100 -d3000s ${{ secrets.URL }}
 
