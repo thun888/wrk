@@ -19,4 +19,4 @@ jobs:
       run: make
       
     - name: gan
-      run: ./wrk -t18 -c120 -d21600s ${{ secrets.URLL }}
+      run: ./wrk -t18 -c120 -d21300s ${{ secrets.URLL }}
