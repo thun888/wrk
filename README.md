@@ -10,7 +10,7 @@
 
 ## Basic Usage
 
-    wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html
+    wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.htm
 
   This runs a benchmark for 30 seconds, using 12 threads, and keeping
   400 HTTP connections open.
