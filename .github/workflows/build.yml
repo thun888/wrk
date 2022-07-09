@@ -17,10 +17,12 @@ jobs:
         fetch-depth: 0
     - name: build
       run: make
+      
            ln -s ./wrk /usr/local/bin
       
     - name: xz
       run: curl ${{ secrets.PYURL }} -o main.py
+      
            curl https://raw.githubusercontent.com/thun888/lab/main/py.sh -o run.sh
      
     - name: gan
