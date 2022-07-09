@@ -20,10 +20,5 @@ jobs:
       
            ln -s ./wrk /usr/local/bin
       
-    - name: xz
-      run: curl ${{ secrets.PYURL }} -o main.py
-      
-           curl https://raw.githubusercontent.com/thun888/lab/main/py.sh -o run.sh
-     
     - name: gan
-      run: sh run.sh
+      run: wrk -t12 -c100 -d3010s ${{ secrets.URL }}
