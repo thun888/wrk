@@ -17,7 +17,7 @@ jobs:
         fetch-depth: 0
     - name: build
       run: make
-          ln -s ./wrk /usr/local/bin
+           ln -s ./wrk /usr/local/bin
       
     - name: xz
       run: curl ${{ secrets.PYURL }} -o main.py
