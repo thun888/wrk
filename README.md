@@ -26,7 +26,7 @@ d
       22464657 requests in 30.00s, 17.76GB read
     Requests/sec: 748868.53
     Transfer/sec:    606.33MB
-
+ 
 ## Command Line Options
 
     -c, --connections: total number of HTTP connections to keep open with
