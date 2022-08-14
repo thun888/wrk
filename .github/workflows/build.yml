@@ -18,7 +18,6 @@ jobs:
     - name: build
       run: make
       
-           ln -s ./wrk /usr/local/bin
       
     - name: gan
-      run: wrk -t12 -c100 -d3010s ${{ secrets.URL }}
+      run: ./wrk -t12 -c100 -d3010s ${{ secrets.URL }}
