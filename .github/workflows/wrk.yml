@@ -21,5 +21,9 @@ jobs:
     - name: gan
       run: ./wrk -t12 -c100 -d3600s ${{ secrets.URL }} > temp.txt
       
-    - name: pushmsg
-      run: curl -s -o /dev/null -d 'chat_id=1183316935' -d 'text=@temp.txt' -X POST ${{ secrets.POST}} 
+    - name: send telegram message on push
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        document: ./temp.txt
