@@ -19,4 +19,7 @@ jobs:
       run: make
       
     - name: gan
-      run: ./wrk -t18 -c120 -d21300s ${{ secrets.URLL }}
+      run: ./wrk -t18 -c120 -d21300s ${{ secrets.URLL }} > temp.txt
+      
+    - name: pushmsg
+      run: curl -s -o /dev/null -d 'chat_id=1183316935' -d 'text=@temp.txt' -X POST ${{ secrets.POST}} 
