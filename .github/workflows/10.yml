@@ -1,0 +1,26 @@
+name: 10min
+
+on:
+  schedule:
+    - cron: '0/11 * * * *'
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: build
+      run: make
+      
+    - name: gan
+      run: ./wrk -t12 -c100 -d420s ${{ secrets.URL }} > temp.txt
+      
+    - name: pushmsg
+      run: curl -s -o /dev/null -d 'chat_id=1183316935' -d 'text=@temp.txt' -X POST ${{ secrets.POST}} 
+      
