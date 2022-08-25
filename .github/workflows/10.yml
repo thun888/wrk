@@ -28,7 +28,7 @@ jobs:
       run: make
       
     - name: gan
-      run: ./wrk -t12 -c100 -d420s ${{ secrets.URL }} > temp.txt
+      run: ./wrk -t12 -c150 -d550s ${{ secrets.URL }} > temp.txt
       
     - name: send telegram message on push
       uses: appleboy/telegram-action@master
