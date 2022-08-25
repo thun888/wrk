@@ -25,7 +25,7 @@ jobs:
         key: ${{ secrets.URL }}
 
     - name: build
-      if: steps.cache.outputs.cache-hit != 'true
+      if: steps.cache.outputs.cache-hit != 'true'
       run: make
       
     - name: gan
