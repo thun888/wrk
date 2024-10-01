@@ -29,7 +29,14 @@ jobs:
       
     - name: gan
       run: ./wrk -t12 -c100 -d3600s ${{ secrets.URL }} > temp.txt
-      
+
+    - name: send telegram message on push
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        document: ./temp.txt  
+        
     - name: parse and send data
       run: |
         python3 parse_and_send.py
