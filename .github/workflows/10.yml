@@ -38,9 +38,9 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         document: ./temp.txt
         
-    - name: parse and send data
-      run: |
-        python3 parse_and_send.py
-      env:
-        SAVEURL: ${{ secrets.SAVEURL }}
-        SAVETOKEN: ${{ secrets.SAVETOKEN }}
+#    - name: parse and send data
+#      run: |
+#        python3 parse_and_send.py
+#      env:
+#        SAVEURL: ${{ secrets.SAVEURL }}
+#        SAVETOKEN: ${{ secrets.SAVETOKEN }}
