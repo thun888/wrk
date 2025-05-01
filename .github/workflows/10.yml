@@ -1,46 +1,39 @@
+---
 name: 10min
-
 on:
   schedule:
-    - cron: '0/11 * * * *'
+    - cron: 0/11 * * * *
   push:
-    branches: 
+    branches:
       - master
-  workflow_dispatch:
-  
+  workflow_dispatch: null
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-
-    - name: Cache 
-      uses: actions/cache@v3
-      id: cache
-      with:
-        path: ../wrk
-        key: ${{ secrets.URL }}
-
-    - name: build
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: make
-      
-    - name: gan
-      run: ./wrk -t12 -c150 -d550s ${{ secrets.URL }} > temp.txt
-      
-    - name: send telegram message on push
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        document: ./temp.txt
-        
-#    - name: parse and send data
-#      run: |
-#        python3 parse_and_send.py
-#      env:
-#        SAVEURL: ${{ secrets.SAVEURL }}
-#        SAVETOKEN: ${{ secrets.SAVETOKEN }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: ${{ github.workspace }}/wrk
+          key: ${{ secrets.URL }}
+      - name: build
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: make
+      - name: gan
+        run: ./wrk -t12 -c150 -d550s ${{ secrets.URL }} > temp.txt
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          document: ./temp.txt
+      - name: parse and send data
+        run: |
+          python3 parse_and_send.py
+        env:
+          SAVEURL: ${{ secrets.SAVEURL }}
+          SAVETOKEN: ${{ secrets.SAVETOKEN }}
