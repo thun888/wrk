@@ -2,7 +2,7 @@ name: wrk
 
 on:
   schedule:
-    - cron: '0/64 * * * *'
+    - cron: '0/60 * * * *'
   push:
     branches: 
       - master
