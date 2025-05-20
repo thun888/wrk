@@ -28,17 +28,30 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: make
 
+    - name: Check URL accessibility
+      id: check_url
+      run: |
+        if curl -s -f -o /dev/null ${{ secrets.URL }}; then
+          echo "::set-output name=accessible::true"
+        else
+          echo "::set-output name=accessible::false"
+          echo "URL is not accessible, skipping subsequent steps"
+        fi
+
     - name: run wrk
+      if: steps.check_url.outputs.accessible == 'true'
       run: ./wrk -t12 -c100 -d3010s ${{ secrets.URL }} > temp.txt
 
-
     - name: send telegram message on push
+      if: steps.check_url.outputs.accessible == 'true'
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         document: ./temp.txt
+
     - name: parse and send data
+      if: steps.check_url.outputs.accessible == 'true'
       run: |
         python3 parse_and_send.py
       env:
