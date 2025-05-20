@@ -27,9 +27,9 @@ jobs:
         id: check_url
         run: |
           if curl -s -f -o /dev/null ${{ secrets.URL }}; then
-            echo "::set-output name=accessible::true"
+            echo "accessible=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=accessible::false"
+            echo "accessible=false" >> $GITHUB_OUTPUT
             echo "URL is not accessible, skipping subsequent steps"
           fi
       - name: gan
